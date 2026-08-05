@@ -68,72 +68,7 @@
 </section>
 
 <section data-screen-label="Blog članci" class="s1e">
-  <div class="s56 mq-grid">
-    <a href="clanak-instrukcije-2026-27.html" class="s57 pi">
-      <img src="assets/img/slika-blogg-card.jpg" alt="Instrukcije 2026./2027." class="s58" width="640" height="380" decoding="async" fetchpriority="high">
-      <div class="s3p">
-        <span class="s3q">Kolovoz, 2026.</span>
-        <h3 class="s3r">Instrukcije iz matematike i fizike tijekom školske godine 2026./2027.</h3>
-        <span class="s59">Pročitaj više →</span>
-      </div>
-    </a>
-    <a href="clanak-prijemni-2026.html" class="s57 pi">
-      <img src="assets/img/slika-za-blog-smanjena-card.jpg" alt="Pripreme za prijemni 2026" class="s58" width="640" height="380" decoding="async" loading="lazy">
-      <div class="s3p">
-        <span class="s3q">Veljača, 2026.</span>
-        <h3 class="s3r">Pripreme za prijemni ispit iz matematike za upis u gimnazije</h3>
-        <span class="s59">Pročitaj više →</span>
-      </div>
-    </a>
-    <a href="clanak-nova-skolska-godina.html" class="s57 pi">
-      <img src="assets/img/pripremi-se-za-novu-skolsku-godinu-card.jpg" alt="Pripremi se za novu školsku godinu" class="s58" width="640" height="380" decoding="async" loading="lazy">
-      <div class="s3p">
-        <span class="s3q">Kolovoz, 2025.</span>
-        <h3 class="s3r">Pripremi se za novu školsku godinu</h3>
-        <span class="s59">Pročitaj više →</span>
-      </div>
-    </a>
-    <a href="clanak-prijemni-2025.html" class="s57 pi">
-      <img src="assets/img/pripreme-za-prijemni-ispit-iz-matematike-card.jpg" alt="Pripreme za prijemni ispit iz matematike" class="s58" width="640" height="380" decoding="async" loading="lazy">
-      <div class="s3p">
-        <span class="s3q">Travanj, 2025.</span>
-        <h3 class="s3r">Pripreme za prijemni ispit iz matematike</h3>
-        <span class="s59">Pročitaj više →</span>
-      </div>
-    </a>
-    <a href="clanak-matematika-penjanje.html" class="s57 pi">
-      <img src="assets/img/matematika-je-kao-penjanje-card.jpg" alt="Matematika je kao penjanje" class="s58" width="640" height="380" decoding="async" loading="lazy">
-      <div class="s3p">
-        <span class="s3q">Siječanj, 2025.</span>
-        <h3 class="s3r">Matematika je kao penjanje…</h3>
-        <span class="s59">Pročitaj više →</span>
-      </div>
-    </a>
-    <a href="clanak-ucitelj-ili-student.html" class="s57 pi">
-      <img src="assets/img/ucitelj-ili-student-card.jpg" alt="Učitelj ili student" class="s58" width="640" height="380" decoding="async" loading="lazy">
-      <div class="s3p">
-        <span class="s3q">Listopad, 2024.</span>
-        <h3 class="s3r">Učitelj ili student?</h3>
-        <span class="s59">Pročitaj više →</span>
-      </div>
-    </a>
-    <a href="clanak-i-ti-to-mozes.html" class="s57 pi">
-      <img src="assets/img/i-ti-to-mozes-card.jpg" alt="I ti to možeš" class="s58" width="640" height="380" decoding="async" loading="lazy">
-      <div class="s3p">
-        <span class="s3q">Lipanj, 2024.</span>
-        <h3 class="s3r">I ti to možeš!</h3>
-        <span class="s59">Pročitaj više →</span>
-      </div>
-    </a>
-    <a href="clanak-zasto-instrukcije.html" class="s57 pi">
-      <img src="assets/img/zasto-neki-ucenici-trebaju-instrukcije-card.jpg" alt="Zašto neki učenici trebaju instrukcije" class="s58" width="640" height="380" decoding="async" loading="lazy">
-      <div class="s3p">
-        <span class="s3q">Veljača, 2024.</span>
-        <h3 class="s3r">Zašto neki učenici trebaju instrukcije?</h3>
-        <span class="s59">Pročitaj više →</span>
-      </div>
-    </a>
-  </div>
+  <div class="s56 mq-grid" id="blog-kartice" aria-live="polite"></div>
 </section>
 
 
@@ -176,5 +111,68 @@
 </footer>
 
 </div>
+<script>
+(function () {
+  const container = document.getElementById('blog-kartice');
+  if (!container) return;
+
+  const createCard = (post, index) => {
+    const card = document.createElement('a');
+    card.className = 's57 pi';
+    card.href = `${post.id}.html`;
+
+    const image = document.createElement('img');
+    image.src = post.image;
+    image.alt = post.headline;
+    image.className = 's58';
+    image.width = 640;
+    image.height = 380;
+    image.decoding = 'async';
+    if (index === 0) {
+      image.fetchPriority = 'high';
+    } else {
+      image.loading = 'lazy';
+    }
+
+    const content = document.createElement('div');
+    content.className = 's3p';
+
+    const date = document.createElement('span');
+    date.className = 's3q';
+    date.textContent = post.date;
+
+    const headline = document.createElement('h3');
+    headline.className = 's3r';
+    headline.textContent = post.headline;
+
+    const more = document.createElement('span');
+    more.className = 's59';
+    more.textContent = 'Pročitaj više →';
+
+    content.append(date, headline, more);
+    card.append(image, content);
+    return card;
+  };
+
+  fetch('posts.json')
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Failed to load posts.json: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((posts) => {
+      if (!Array.isArray(posts)) {
+        throw new Error('posts.json does not contain an array');
+      }
+
+      container.replaceChildren(...posts.map(createCard));
+    })
+    .catch(() => {
+      container.removeAttribute('aria-live');
+      container.textContent = '';
+    });
+}());
+</script>
 </body>
 </html>

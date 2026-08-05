@@ -329,32 +329,7 @@
       </div>
       <a href="blog.html" class="s39 p4">Pogledaj više</a>
     </div>
-    <div class="s3a mq-grid">
-      <a href="clanak-instrukcije-2026-27.html" class="s3n pd">
-        <img src="assets/img/slika-blogg-card.jpg" alt="Instrukcije 2026./2027." class="s3o" width="640" height="380" decoding="async" fetchpriority="high">
-        <div class="s3p">
-          <span class="s3q">Kolovoz, 2026.</span>
-          <h3 class="s3r">Instrukcije iz matematike i fizike tijekom školske godine 2026./2027.</h3>
-          <span class="s3s">Pročitaj više →</span>
-        </div>
-      </a>
-      <a href="clanak-prijemni-2026.html" class="s3n pd">
-        <img src="assets/img/slika-za-blog-smanjena-card.jpg" alt="Pripreme za prijemni ispit" class="s3o" width="640" height="380" decoding="async" loading="lazy">
-        <div class="s3p">
-          <span class="s3q">Veljača, 2026.</span>
-          <h3 class="s3r">Pripreme za prijemni ispit iz matematike za upis u gimnazije</h3>
-          <span class="s3s">Pročitaj više →</span>
-        </div>
-      </a>
-      <a href="clanak-nova-skolska-godina.html" class="s3n pd">
-        <img src="assets/img/pripremi-se-za-novu-skolsku-godinu-card.jpg" alt="Pripremi se za novu školsku godinu" class="s3o" width="640" height="380" decoding="async" loading="lazy">
-        <div class="s3p">
-          <span class="s3q">Kolovoz, 2025.</span>
-          <h3 class="s3r">Pripremi se za novu školsku godinu</h3>
-          <span class="s3s">Pročitaj više →</span>
-        </div>
-      </a>
-    </div>
+    <div class="s3a mq-grid" id="novosti-kartice" aria-live="polite"></div>
   </div>
 </section>
 
@@ -492,6 +467,69 @@
 </footer>
 
 </div>
+<script>
+(function () {
+  const container = document.getElementById('novosti-kartice');
+  if (!container) return;
+
+  const createCard = (post, index) => {
+    const card = document.createElement('a');
+    card.className = 's3n pd';
+    card.href = `${post.id}.html`;
+
+    const image = document.createElement('img');
+    image.src = post.image;
+    image.alt = post.headline;
+    image.className = 's3o';
+    image.width = 640;
+    image.height = 380;
+    image.decoding = 'async';
+    if (index === 0) {
+      image.fetchPriority = 'high';
+    } else {
+      image.loading = 'lazy';
+    }
+
+    const content = document.createElement('div');
+    content.className = 's3p';
+
+    const date = document.createElement('span');
+    date.className = 's3q';
+    date.textContent = post.date;
+
+    const headline = document.createElement('h3');
+    headline.className = 's3r';
+    headline.textContent = post.headline;
+
+    const more = document.createElement('span');
+    more.className = 's3s';
+    more.textContent = 'Pročitaj više →';
+
+    content.append(date, headline, more);
+    card.append(image, content);
+    return card;
+  };
+
+  fetch('posts.json')
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Failed to load posts.json: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((posts) => {
+      if (!Array.isArray(posts)) {
+        throw new Error('posts.json does not contain an array');
+      }
+
+      container.replaceChildren(...posts.slice(0, 3).map(createCard));
+    })
+    .catch(() => {
+      container.removeAttribute('aria-live');
+      container.textContent = '';
+    });
+}());
+</script>
 <script src="assets/js/form.js" defer></script>
 </body>
 </html>
