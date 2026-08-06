@@ -41,6 +41,11 @@ img{height:auto}
 .sb.sb{display:flex;gap:26px;margin-left:auto;align-items:center}
 .sc.sc{color:#1F2A44;text-decoration:none;font-weight:600;font-size:15px}
 .sd.sd{background:#E2477E;color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:11px 22px;border-radius:999px;box-shadow:0 6px 16px rgba(226,71,126,0.3);transition:all 0.2s}
+.se.se {
+  background: rgba(13,115,119,0.055);
+  background-size: 34px 34px,34px 34px,100% 100%;
+  overflow: hidden;
+}
 .sf.sf{max-width:1200px;margin:0 auto;padding:72px 24px 64px;display:grid;grid-template-columns:1.15fr 0.85fr;gap:48px;align-items:center}
 .sg.sg{display:flex;flex-direction:column;gap:22px}
 .sh.sh{display:flex;gap:8px;flex-wrap:wrap}
@@ -319,6 +324,29 @@ img{height:auto}
 .s6i.s6i{background:#FDEBF2;border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:8px}
 .s6j.s6j{font-weight:800;font-size:18px;color:#B22A61}
 .s6k.s6k{background:#FFF6DE;border-radius:18px;padding:22px 26px;font-weight:700;color:#1F2A44;font-size:17px;line-height:1.6}
+
+
+.s3w.s3w > summary{
+  cursor:pointer;
+  list-style:none;
+}
+.s3w.s3w > summary::-webkit-details-marker{
+  display:none;
+}
+.s3w.s3w{
+  overflow:hidden;
+}
+.s3z.s3z{
+  margin:0;
+  padding-top:12px;
+}
+.s3y.s3y{
+  display:inline-block;
+  transition:transform .3s ease;
+}
+.s3w.s3w[open] .s3y.s3y{
+  transform:rotate(45deg);
+}
 
 /* ---- interaction states (from style-hover / style-focus) ---- */
 .p0.p0:hover{color:#FFC93F}
