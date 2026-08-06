@@ -81,7 +81,7 @@ img{height:auto}
 .su:hover{
     cursor:pointer
 }
-.sv.sv{font-weight:700;font-size:15px;color:#42506B;text-decoration: none;}
+.sv.sv{height:30px}
 .sw.sw{color:#FFC93F;font-size:17px;letter-spacing:2px;text-decoration: none;}
 .sx.sx{font-weight:800;font-size:15px;text-decoration: none;}
 .sy.sy{color:#8A97AF;font-size:14px;text-decoration: none;}
@@ -147,7 +147,8 @@ img{height:auto}
 .s1h.s1h{color:#0D7377;font-weight:700;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;width:fit-content;border-bottom:3px solid #FFC93F;padding-bottom:3px}
 .s1i.s1i{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:40px;line-height:1.1;letter-spacing:-1px;text-wrap:balance}
 .s1j.s1j{background:linear-gradient(transparent 66%,rgba(255,201,63,0.55) 66%)}
-.s1k.s1k{display:flex;flex-direction: row;gap:22px;}
+.s1k.s1k{display:grid;grid-template-columns:1fr 1fr;gap:22px;width:50%}
+.s1k2.s1k2{display:flex;flex-direction: row;gap:22px;}
 .s1l.s1l{background:#F1F8F6;border-radius:20px;padding:28px 24px;display:flex;flex-direction:column;gap:12px;transition:all 0.25s}
 .s1m.s1m{width:48px;height:48px;border-radius:14px;background:#0D7377;color:#fff;display:flex;align-items:center;justify-content:center;transform:rotate(-6deg);font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:22px}
 .s1n.s1n{margin:0;font-size:18.5px;font-weight:700}
