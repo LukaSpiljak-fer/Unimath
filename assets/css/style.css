@@ -53,7 +53,7 @@ img{height:auto}
 .sh.sh{display:flex;gap:8px;flex-wrap:wrap}
 .si.si{background:#DCEFEB;color:#0A4A4D;font-weight:700;font-size:13.5px;padding:7px 14px;border-radius:999px}
 .sj.sj{background:#FDEBF2;color:#B22A61;font-weight:700;font-size:13.5px;padding:7px 14px;border-radius:999px}
-.sk.sk{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:56px;line-height:1.06;letter-spacing:-1.5px;text-wrap:balance}
+.sk.sk{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:52px;line-height:1.06;letter-spacing:-1.5px;text-wrap:balance}
 .sl.sl{color:#E2477E;background:linear-gradient(transparent 68%,rgba(255,201,63,0.5) 68%)}
 .sm.sm{color:#2E90D9;background:linear-gradient(transparent 68%,rgba(255,201,63,0.5) 68%)}
 .sn.sn{margin:0;font-size:19px;line-height:1.6;color:#42506B;max-width:520px;text-wrap:pretty}
@@ -410,9 +410,9 @@ img{height:auto}
   header nav a{white-space:nowrap}
   header > div > a[href*="kontakt"]{margin-left:auto;font-size:13.5px !important;padding:9px 16px !important}
   [data-screen-label="Hero"] > div{padding:44px 20px 52px !important;gap:40px !important}
-    [data-screen-label="Hero"] .sh{flex-direction:column;align-items:flex-start;gap:10px}
+    [data-screen-label="Hero"] 
     [data-screen-label="Hero"] .si{font-size:12.5px;padding:6px 12px}
-    [data-screen-label="Hero"] .sk{font-size:clamp(34px,10vw,42px) !important;line-height:1.08 !important;max-width:12ch}
+    [data-screen-label="Hero"] .sk{font-size:clamp(32px,9vw,42px) !important;line-height:1.08 !important;width: 16ch;}
     [data-screen-label="Hero"] .sn{font-size:17px !important;line-height:1.55 !important;max-width:100%}
     [data-screen-label="Hero"] .sz{justify-self:center;width:min(100%,430px)}
     [data-screen-label="Hero"] .s14{width:min(100%,430px);height:auto;aspect-ratio:430 / 560}
