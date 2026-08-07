@@ -4,3 +4,4 @@ build/fonts.css
 build/assets-manifest.json
 build/image-renames.json
 build/font-files.json
+backend/package-lock.json
