@@ -421,5 +421,9 @@ img{height:auto}
   section > div, article, footer > div{padding-left:20px !important;padding-right:20px !important}
   form{padding:24px !important}
   .s1k.s1k{display:flex;flex-direction: column;}
-  .zastoflex{flex-direction: column; align-items: center;}
+  .s1k2.s1k2{display:flex; flex-direction: column; align-items: center;}
+  .zastoflex{flex-direction: column; align-items: center; width:100%;}
+  .zfitem{width:min(75vw,180%); max-width:75vw; align-self:center;}
+  .s1w{width:min(75vw,180%); max-width:75vw; align-self:center;}
+  .pb{width:min(75vw,180%); max-width:75vw; align-self:center;}
 }
