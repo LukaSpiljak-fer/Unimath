@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Google Reviews Widget Demo</title>
+<style>
+  body { font-family: system-ui, sans-serif; padding: 40px; background: #fafafa; }
+
+  .google-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border: 1px solid #e3e3e3;
+    border-radius: 10px;
+    background: #fff;
+    font-size: 15px;
+    color: #2b2b2b;
+  }
+
+  .google-rating__logo {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .google-rating__stars {
+    position: relative;
+    display: inline-block;
+    font-size: 18px;
+    line-height: 1;
+    letter-spacing: 2px;
+  }
+  .google-rating__stars-track { color: #d6d6d6; }
+  .google-rating__stars-fill {
+    position: absolute;
+    top: 0; left: 0;
+    overflow: hidden;
+    width: calc(var(--rating, 0) / 5 * 100%);
+    color: #fbbc04;
+    white-space: nowrap;
+  }
+
+  .google-rating__score { font-weight: 600; }
+  .google-rating__count { color: #6b6b6b; }
+  .google-rating__count a { color: inherit; text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<!-- This is the div you drop into your site -->
+<div id="google-rating" class="google-rating" aria-live="polite">
+  <span>Loading reviews…</span>
+</div>
+
+<script>
+async function loadGoogleRating() {
+  const el = document.getElementById('google-rating');
+  try {
+    const res = await fetch('/api/google-rating');
+    if (!res.ok) throw new Error('bad response');
+    const data = await res.json();
+
+    if (!data.rating) {
+      el.innerHTML = '<span>No reviews yet</span>';
+      return;
+    }
+
+    const stars = '★★★★★';
+    const countText = data.reviewCount
+      ? `(${data.reviewCount.toLocaleString()} reviews)`
+      : '';
+
+    el.innerHTML = `
+      <svg class="google-rating__logo" viewBox="0 0 48 48" aria-hidden="true">
+        <path fill="#4285F4" d="M45.1 24.5c0-1.6-.1-3.1-.4-4.6H24v9h11.8c-.5 2.7-2 5-4.3 6.6v5.5h7C42.5 37 45.1 31.3 45.1 24.5z"/>
+        <path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.4l-7-5.5c-2 1.3-4.5 2.1-7.5 2.1-5.8 0-10.7-3.9-12.4-9.1H4.3v5.7C7.9 41.1 15.4 46 24 46z"/>
+        <path fill="#FBBC05" d="M11.6 27.9c-.4-1.3-.7-2.6-.7-4s.3-2.7.7-4v-5.7H4.3C2.8 17.1 2 20.5 2 24s.8 6.9 2.3 9.6l7.3-5.7z"/>
+        <path fill="#EA4335" d="M24 10.8c3.2 0 6.1 1.1 8.3 3.3l6.2-6.2C34.9 4.3 29.9 2 24 2 15.4 2 7.9 6.9 4.3 14.3l7.3 5.7c1.7-5.2 6.6-9.2 12.4-9.2z"/>
+      </svg>
+      <span class="google-rating__stars" style="--rating:${data.rating}">
+        <span class="google-rating__stars-track">${stars}</span>
+        <span class="google-rating__stars-fill">${stars}</span>
+      </span>
+      <span class="google-rating__score">${data.rating.toFixed(1)}</span>
+      <span class="google-rating__count">${
+        data.mapsUrl ? `<a href="${data.mapsUrl}" target="_blank" rel="noopener">${countText}</a>` : countText
+      }</span>
+    `;
+  } catch (err) {
+    el.innerHTML = '<span>Reviews unavailable</span>';
+  }
+}
+
+loadGoogleRating();
+</script>
+
+</body>
+</html>
