@@ -165,7 +165,7 @@ img{height:auto}
 .s1w.s1w{margin:0}
 .s1x.s1x{color:#1F2A44}
 .s1y.s1y{background:#F1F8F6}
-.s1z.s1z{max-width:1200px;margin:0 auto;padding:80px 24px 88px;display:flex;flex-direction:column;gap:44px}
+.s1z.s1z{max-width:1500px;margin:0 auto;padding:80px 24px 88px;display:flex;flex-direction:column;gap:44px}
 .s20.s20{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
 .s21.s21{display:flex;flex-direction:column;gap:14px;max-width:560px}
 .s22.s22{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:40px;line-height:1.1;letter-spacing:-1px}
@@ -176,11 +176,11 @@ img{height:auto}
 .s27.s27{background:#DCEFEB;color:#0A4A4D;font-weight:700;font-size:13px;padding:6px 13px;border-radius:999px}
 .s28.s28{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:26px;color:#0D7377}
 .s29.s29{font-size:15px;font-weight:600;color:#8A97AF}
-.s2a.s2a{margin:0;font-size:22px;font-weight:700;line-height:1.25}
+.s2a.s2a{margin:0;font-size:21px;font-weight:700;line-height:1.25}
 .s2b.s2b{margin:0;font-size:15.5px;line-height:1.55;color:#42506B}
-.s2c.s2c{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:14.5px;color:#42506B}
-.s2d.s2d{margin-top:auto;background:#0D7377;color:#fff;text-decoration:none;font-weight:700;font-size:15.5px;padding:13px 24px;border-radius:999px;text-align:center}
-.s2e.s2e{margin-top:auto;background:#E2477E;color:#fff;text-decoration:none;font-weight:700;font-size:15.5px;padding:13px 24px;border-radius:999px;text-align:center}
+.s2c.s2c{margin-top:auto;display:flex;flex-direction: column;gap:10px;font-size:14.5px;color:#42506B}
+.s2d.s2d{background:#0D7377;color:#fff;text-decoration:none;font-weight:700;font-size:15.5px;padding:13px 24px;border-radius:999px;text-align:center}
+.s2e.s2e{background:#E2477E;color:#fff;text-decoration:none;font-weight:700;font-size:15.5px;padding:13px 24px;border-radius:999px;text-align:center}
 .s2f.s2f{background:#FDEBF2;color:#B22A61;font-weight:700;font-size:13px;padding:6px 13px;border-radius:999px}
 .s2g.s2g{max-width:1200px;margin:0 auto;padding:88px 24px;display:grid;grid-template-columns:0.9fr 1.1fr;gap:56px;align-items:center}
 .s2h.s2h{position:absolute;top:18px;left:24px;width:90px;height:90px;border-radius:50%;background:#FFC93F;opacity:0.85}
@@ -335,6 +335,41 @@ img{height:auto}
 .s6k.s6k{background:#FFF6DE;border-radius:18px;padding:22px 26px;font-weight:700;color:#1F2A44;font-size:17px;line-height:1.6}
 
 
+.s2c > span{
+  width:100%;
+  box-sizing:border-box;
+  min-height:48px;
+  padding:10px 14px;
+  display:flex;
+  gap:10px;
+  line-height:1.35;
+  border-radius:23px;
+  background:#F8FBFB;
+  border:1px solid #E5EEEC;
+  box-shadow:0 4px 12px rgba(10,74,77,0.05);
+  align-items: center;
+}
+
+.s2c > span img{
+  width:18px;
+  height:18px;
+  object-fit:contain;
+  flex-shrink:0;
+}
+
+
+.s2c.pink > span{
+  background-color: rgb(255, 241, 245);
+}
+
+.s2c.green > span{
+  background-color: rgb(231, 241, 242);
+}
+
+.s2c.green > span > img{
+  color: #0000;
+}
+
 .arrow{
     text-decoration: solid;
     font:bold;
@@ -374,6 +409,10 @@ img{height:auto}
   transform:rotate(45deg);
 }
 
+.podukebtn{
+  height: 60%;
+}
+
 /* ---- interaction states (from style-hover / style-focus) ---- */
 .p0.p0:hover{color:#FFC93F}
 .p1.p1:hover{color:#0D7377}
@@ -384,7 +423,7 @@ img{height:auto}
 .p6.p6:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(178,42,97,0.14)}
 .p7.p7:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(200,150,20,0.16)}
 .p8.p8:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(46,144,217,0.16)}
-.p9.p9{height:85%}
+.p9.p9{height:90%}
 .p9.p9:hover{box-shadow:0 18px 44px rgba(10,74,77,0.12);transform:translateY(-4px)}
 .pa.pa:hover{background:#0A5A5D}
 .pb.pb:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,0.25)}
