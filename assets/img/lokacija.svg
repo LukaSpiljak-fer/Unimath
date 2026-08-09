@@ -1,0 +1,8 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
+	<defs>
+		<image  width="34" height="29" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAdCAMAAAD4tU6IAAAAAXNSR0IB2cksfwAAAD9QTFRFAAAA32iH31qB4FuE4FuD4FqE4FyD32CH31qK4FyE31uC31qC4F2D4VuE31mG31yB4FqD4V6F4F2D31uE4FuDz8vg0QAAABV0Uk5TACCQ3//f7yAwv7Bgr59QgK9v73DP03ktNQAAALBJREFUeJzV09sOgjAMgOH+EJDDBfr+TykRAY1MBguHsuG1u2m3fku6NEP2C8QYdaS20UgGc0JGAYMyaBExKIMWvWTKcBCiDUehDR6hDD6xN3jFzuAXW0NAbAwhsRqCYjFMk0tajxDJ33am2HhCJH0iJbRBkn2S2rZbNY5QuZY640h5n1+0kKpx120lRCjG8OCMTMlc+Vty6+RFFE9HLslrk87EJgWx+o+HdeWS/SD9F3krpE0JdDc9AAAAAElFTkSuQmCC"/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="1" y="3"/>
+</svg>
