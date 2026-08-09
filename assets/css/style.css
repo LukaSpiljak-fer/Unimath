@@ -420,6 +420,8 @@ img{height:auto}
 
 .zfitem{
   padding: 28px 24px;
+  height: 210px;
+  width: 210px;
 }
 
 /* ---- interaction states (from style-hover / style-focus) ---- */
@@ -482,4 +484,5 @@ img{height:auto}
   .s2x.s2x{width:75vw; align-self:center;overflow:hidden;flex:0 0 auto;}
   .ss.ss{padding: 15px 20px;}
   .st.st{padding: 15px 20px;}
+  .s1v{width: 88vw;}
 }
