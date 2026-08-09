@@ -421,6 +421,7 @@ img{height:auto}
 .zfitem{
   padding: 28px 24px;
   width: 260px;
+  height: 170px;
 }
 
 /* ---- interaction states (from style-hover / style-focus) ---- */
