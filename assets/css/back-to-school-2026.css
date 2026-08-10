@@ -436,7 +436,6 @@ p {
 .intro-copy {
   max-width: 720px;
   color: var(--muted);
-  margin: 0 0 40px;
 }
 .principles {
   grid-template-columns: repeat(3, 1fr);
@@ -506,7 +505,7 @@ p {
 .section-lead {
   max-width: 720px;
   color: var(--muted);
-  margin: -18px 0 40px;
+  margin: -18px 0 10px;
 }
 .step-grid {
   grid-template-columns: 1fr 1fr;
@@ -516,7 +515,7 @@ p {
 .step-card {
   border-radius: 18px;
   flex-direction: column;
-  min-height: 300px;
+  min-height: 265px;
   padding: 27px;
   display: flex;
 }
@@ -547,7 +546,7 @@ p {
   background: var(--pink);
 }
 .step-card h3 {
-  margin: 38px 0 48px;
+  margin: 38px 0 15px;
   font-size: 17px;
   line-height: 1.15;
   font-weight: 700;
