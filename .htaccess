@@ -1,0 +1,52 @@
+# UniMath — Apache konfiguracija za cPanel hosting
+# 301 preusmjeravanja sa starih WordPress URL-ova (čuvaju Google ranking nakon migracije)
+
+RewriteEngine On
+
+# HTTPS + bez www (kanonski oblik: https://unimath.hr)
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+# --- Stari WordPress URL-ovi → nove stranice (redoslijed: specifičnije prvo) ---
+RedirectMatch 301 ^/pripreme-za-prijemni-ispit-iz-matematike-za-upis-u-gimnazije/?$ https://unimath.hr/clanak-prijemni-2026.html
+RedirectMatch 301 ^/pripreme-za-prijemni-ispit-iz-matematike/?$ https://unimath.hr/clanak-prijemni-2025.html
+RedirectMatch 301 ^/individualne-instrukcije-iz-matematike-i-fizike-tijekom-skolske-godine-2026-2027/?$ https://unimath.hr/clanak-instrukcije-2026-27.html
+RedirectMatch 301 ^/matematika-je-kao-penjanje/?$ https://unimath.hr/clanak-matematika-penjanje.html
+RedirectMatch 301 ^/ucitelj-ili-student/?$ https://unimath.hr/clanak-ucitelj-ili-student.html
+RedirectMatch 301 ^/zasto-neki-ucenici-trebaju-instrukcije-2/?$ https://unimath.hr/clanak-zasto-instrukcije.html
+RedirectMatch 301 ^/iti-to-mozes/?$ https://unimath.hr/clanak-i-ti-to-mozes.html
+RedirectMatch 301 ^/pripremi-se-za-novu-skolsku-godinu/?$ https://unimath.hr/clanak-nova-skolska-godina.html
+RedirectMatch 301 ^/politika-privatnosti/?$ https://unimath.hr/politika-privatnosti.html
+RedirectMatch 301 ^/blog/?$ https://unimath.hr/blog.html
+RedirectMatch 301 ^/home/?$ https://unimath.hr/
+
+# WP taksonomije i ostalo indeksirano smeće
+RedirectMatch 301 ^/category/blog/?$ https://unimath.hr/blog.html
+RedirectMatch 301 ^/category/.*$ https://unimath.hr/blog.html
+RedirectMatch 301 ^/author/.*$ https://unimath.hr/
+RedirectMatch 301 ^/elementor-hf/.*$ https://unimath.hr/
+
+# Yoast sitemap index → novi sitemap (da Google/Search Console nađe novi)
+RedirectMatch 301 ^/sitemap_index\.xml$ https://unimath.hr/sitemap.xml
+RedirectMatch 301 ^/(post|page|category|author|elementor-hf)-sitemap\.xml$ https://unimath.hr/sitemap.xml
+
+# --- Performanse (Core Web Vitals) ---
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json image/svg+xml
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 6 months"
+  ExpiresByType image/png "access plus 6 months"
+  ExpiresByType image/svg+xml "access plus 6 months"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+# pravi 404 status s vlastitom stranicom (ne soft-404 preko home stranice)
+ErrorDocument 404 /404.html
