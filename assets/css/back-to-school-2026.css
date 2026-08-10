@@ -730,6 +730,12 @@ footer {
   }
 }
 @media (width<=620px) {
+  .s5h{
+    flex-direction: column;
+  }
+  .dolje{
+    padding-left: 18px;
+  }
   body {
     font-size: 16px;
   }
@@ -771,7 +777,7 @@ footer {
     font-size: 31px;
   }
   .step-card {
-    min-height: 330px;
+    min-height: 240px;
   }
   .signup-card {
     border-radius: 22px 22px 22px 48px;

@@ -478,10 +478,11 @@ img{height:auto}
   .pb{width:75vw; align-self:center;}
   .s39.s39{width: 26vw;
     font-size: 15px;
-    font-weight:650;}
+    font-weight:650;
+    min-width: 120px;}
   .googleG{width: 5vw;height:5vw}
   .sverecflex{margin-left: auto;}
-  .s2x.s2x{width:75vw; align-self:center;overflow:hidden;flex:0 0 auto;}
+  .s2x.s2x{width:85vw; align-self:center;overflow:hidden;flex:0 0 auto;}
   .ss.ss{padding: 15px 20px;}
   .st.st{padding: 15px 20px;}
   .s1v{width: 88vw;}
