@@ -9,7 +9,7 @@
 (function () {
   'use strict';
 
-  var ENDPOINT = '';                  // <— ovdje zalijepi URL
+  var ENDPOINT = '/api/send-form';    // Node backend na cPanelu (montiran pod /api)
   var MAILTO = 'info@unimath.hr';
 
   var form = document.getElementById('kontakt-forma');
