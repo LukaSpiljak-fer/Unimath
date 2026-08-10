@@ -32,6 +32,14 @@ RedirectMatch 301 ^/elementor-hf/.*$ https://unimath.hr/
 RedirectMatch 301 ^/sitemap_index\.xml$ https://unimath.hr/sitemap.xml
 RedirectMatch 301 ^/(post|page|category|author|elementor-hf)-sitemap\.xml$ https://unimath.hr/sitemap.xml
 
+# --- Sigurnosni headeri ---
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
 # --- Performanse (Core Web Vitals) ---
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json image/svg+xml

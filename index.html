@@ -16,6 +16,8 @@
 <meta property="og:description" content="Individualne online instrukcije iz matematike i fizike za osnovnu i srednju školu. Pripreme za prijemne ispite i državnu maturu. Ocjena 5.0 na Googleu.">
 <meta property="og:url" content="https://unimath.hr/">
 <meta property="og:image" content="https://unimath.hr/assets/img/unimath-hero.jpg">
+<meta property="og:image:width" content="432">
+<meta property="og:image:height" content="625">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="UniMath – instrukcije iz matematike i fizike | online 1 na 1">
 <meta name="twitter:description" content="Individualne online instrukcije iz matematike i fizike za osnovnu i srednju školu. Pripreme za prijemne ispite i državnu maturu. Ocjena 5.0 na Googleu.">
@@ -88,7 +90,8 @@
         <div class="hero-bg"></div>
 
           <img
-              src="assets/img/Hero.png"
+              src="assets/img/Hero.webp"
+              alt="Instrukcije iz matematike i fizike – UniMath"
               class="s15"
               width="450"
               height="655"
@@ -304,7 +307,7 @@
   <div class="s2g mq-grid">
     <div class="sz">
       <div class="s2i">
-        <img src="assets/img/unimath-maja-2-full.png" alt="Maja Horvat, mag. educ. math." class="s2j" width="830" height="1024" decoding="async" fetchpriority="high">
+        <img src="assets/img/unimath-maja-2-full.webp" alt="Maja Horvat, mag. educ. math." class="s2j" width="830" height="1024" decoding="async" loading="lazy">
       </div>
       <div class="s2k">
         <span class="s2l">Maja Horvat</span>
@@ -423,7 +426,34 @@
       </div>
       <a href="blog.html" class="s39 p4 blog">Pogledaj više</a>
     </div>
-    <div class="s3a mq-grid" id="novosti-kartice" aria-live="polite"></div>
+    <div class="s3a mq-grid" id="novosti-kartice">
+    <!-- blog-cards:start -->
+    <a class="s3n pd" href="back-to-school-2026-2027.html">
+      <img src="assets/img/back-to-school-2026.webp" alt="Back to school 2026./2027." class="s3o" width="640" height="380" decoding="async" fetchpriority="high">
+      <div class="s3p">
+        <span class="s3q">Kolovoz, 2026.</span>
+        <h3 class="s3r">Back to school 2026./2027.</h3>
+        <span class="s3s">Pročitaj više →</span>
+      </div>
+    </a>
+    <a class="s3n pd" href="clanak-instrukcije-2026-27.html">
+      <img src="assets/img/slika-blogg-lg.jpg" alt="Individualne instrukcije iz matematike i fizike tijekom školske godine 2026./2027." class="s3o" width="640" height="380" decoding="async" loading="lazy">
+      <div class="s3p">
+        <span class="s3q">Kolovoz, 2026.</span>
+        <h3 class="s3r">Individualne instrukcije iz matematike i fizike tijekom školske godine 2026./2027.</h3>
+        <span class="s3s">Pročitaj više →</span>
+      </div>
+    </a>
+    <a class="s3n pd" href="clanak-prijemni-2026.html">
+      <img src="assets/img/slika-za-blog-smanjena-lg.jpg" alt="Pripreme za prijemni ispit iz matematike za upis u gimnazije" class="s3o" width="640" height="380" decoding="async" loading="lazy">
+      <div class="s3p">
+        <span class="s3q">Veljača, 2026.</span>
+        <h3 class="s3r">Pripreme za prijemni ispit iz matematike za upis u gimnazije</h3>
+        <span class="s3s">Pročitaj više →</span>
+      </div>
+    </a>
+    <!-- blog-cards:end -->
+    </div>
   </div>
 </section>
 
@@ -563,65 +593,6 @@
 </div>
 <script>
 (function () {
-  const container = document.getElementById('novosti-kartice');
-  if (!container) return;
-
-  const createCard = (post, index) => {
-    const card = document.createElement('a');
-    card.className = 's3n pd';
-    card.href = `${post.id}.html`;
-
-    const image = document.createElement('img');
-    image.src = post.image;
-    image.alt = post.headline;
-    image.className = 's3o';
-    image.width = 640;
-    image.height = 380;
-    image.decoding = 'async';
-    if (index === 0) {
-      image.fetchPriority = 'high';
-    } else {
-      image.loading = 'lazy';
-    }
-
-    const content = document.createElement('div');
-    content.className = 's3p';
-
-    const date = document.createElement('span');
-    date.className = 's3q';
-    date.textContent = post.date;
-
-    const headline = document.createElement('h3');
-    headline.className = 's3r';
-    headline.textContent = post.headline;
-
-    const more = document.createElement('span');
-    more.className = 's3s';
-    more.textContent = 'Pročitaj više →';
-
-    content.append(date, headline, more);
-    card.append(image, content);
-    return card;
-  };
-
-  fetch('posts.json')
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Failed to load posts.json: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then((posts) => {
-      if (!Array.isArray(posts)) {
-        throw new Error('posts.json does not contain an array');
-      }
-
-      container.replaceChildren(...posts.slice(0, 3).map(createCard));
-    })
-    .catch(() => {
-      container.removeAttribute('aria-live');
-      container.textContent = '';
-    });
   class Accordion {
   constructor(el) {
     this.el = el;
