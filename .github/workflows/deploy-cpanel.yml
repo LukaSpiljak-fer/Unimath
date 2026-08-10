@@ -30,6 +30,7 @@ jobs:
             **/.git*/**
             **/node_modules/**
             backend/**
+            scripts/**
             .vscode/**
             README.md
             DEPLOYMENT.md
