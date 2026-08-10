@@ -1,65 +1,55 @@
-# Deployment (cPanel)
+# Deployment (cPanel — MyDataKnox shared hosting)
 
-The site has two parts, both hosted on cPanel:
+Everything is hosted on cPanel. No Node.js needed — the contact form is handled by a
+plain PHP script (`api/send-form.php`), which works on every shared hosting plan.
 
-- **Static site** (`index.html`, `assets/`, all `clanak-*.html`, `blog.html`, `posts.json`,
-  `robots.txt`, `sitemap.xml`, …) → served from `public_html`.
-- **Contact-form backend** (`backend/`) — a small Express app that sends the form via
-  SMTP → runs as a cPanel **Node.js application** mounted at `/api`.
+- **Static site**: `index.html`, all `clanak-*.html`, `blog.html`, `assets/`,
+  `posts.json`, `robots.txt`, `sitemap.xml` → `public_html/`
+- **Form handler**: `api/send-form.php` → `public_html/api/send-form.php`
+- The form on the site POSTs to `/api/send-form.php` (same domain, no CORS setup needed).
 
-The form on the site POSTs to `/api/send-form` (same domain, no CORS issues).
-
-## 1. Upload the static site
+## 1. Upload the site
 
 Upload everything **except** `backend/`, `.git/`, `.github/`, `.vscode/`, `README.md`
-and `DEPLOYMENT.md` into `public_html/` (File Manager zip-upload or FTP).
+and `DEPLOYMENT.md` into `public_html/`:
 
-## 2. Deploy the backend
+1. Zip the project folder locally (without the folders above).
+2. cPanel → **File Manager** → `public_html` → *Upload* → then *Extract*.
+   (Or use FTP with the credentials from your MyDataKnox welcome mail.)
+3. Make sure `index.html` ends up directly in `public_html/`, not in a subfolder,
+   and that `api/send-form.php` is at `public_html/api/send-form.php`.
 
-Requires the "**Setup Node.js App**" feature in cPanel (most hosts have it; if yours
-doesn't, ask support to enable it).
+## 2. Email
 
-1. Create the mailbox for sending in cPanel → **Email Accounts**, e.g. `no-reply@unimath.hr`.
-   Note the SMTP settings under *Connect Devices* (host is usually `mail.unimath.hr`, port 465 SSL).
-2. cPanel → **Setup Node.js App** → *Create Application*:
-   - Node.js version: **18 or newer**
-   - Application mode: `Production`
-   - Application root: `unimath-backend` (a folder in your home dir, *outside* `public_html`)
-   - Application URL: your domain + `/api` (e.g. `unimath.hr/api`)
-   - Application startup file: `server.js`
-3. Upload `backend/server.js` and `backend/package.json` into `~/unimath-backend/`.
-   **Do not upload `node_modules` or `.env` with placeholder values.**
-4. In the Node.js App screen add the environment variables (see `backend/.env.example`):
-   - `SMTP_HOST` = `mail.unimath.hr`
-   - `SMTP_PORT` = `465`, `SMTP_SECURE` = `true`
-   - `SMTP_USER` / `SMTP_PASS` = the mailbox credentials
-   - `SENDER_EMAIL` = `no-reply@unimath.hr`
-   - `TO_EMAIL` = `info@unimath.hr`
-   - `ALLOWED_ORIGINS` = `https://unimath.hr,https://www.unimath.hr`
-5. Click **Run NPM Install**, then **Restart**.
+1. cPanel → **Email Accounts** → make sure `info@unimath.hr` exists (that's where
+   form submissions are delivered). If mail for the domain is hosted elsewhere
+   (e.g. Google Workspace), that's fine too — delivery goes to wherever the domain's
+   MX records point.
+2. The script sends from `no-reply@unimath.hr` with the visitor's address as
+   *Reply-To*, so you can hit "Reply" directly. Creating a `no-reply@unimath.hr`
+   mailbox (or at least not blocking the address) improves deliverability, but is
+   not strictly required — shared cPanel hosts allow `mail()` from the domain.
 
-## 3. Verify
+## 3. Domain & SSL
 
-- Make sure SSL is active for the domain (cPanel → SSL/TLS Status → AutoSSL).
-- Test the endpoint:
-  ```bash
-  curl -X POST https://unimath.hr/api/send-form -F email=test@test.com -F poruka=proba
-  ```
-  → should return `{"ok":true}` and deliver a mail to `TO_EMAIL`.
-- Submit the form on the live site and check the inbox.
+1. Point `unimath.hr` to the hosting (nameservers or A record — MyDataKnox support
+   can confirm the values; skip if the domain is already with them).
+2. cPanel → **SSL/TLS Status** → run **AutoSSL** for `unimath.hr` and `www.unimath.hr`.
+3. Optionally force HTTPS: cPanel → Domains → toggle *Force HTTPS Redirect*.
+
+## 4. Verify
+
+```bash
+curl -X POST https://unimath.hr/api/send-form.php -F email=test@test.com -F poruka=proba
+```
+→ should return `{"ok":true}` and a mail should arrive at `info@unimath.hr`
+(check spam folder on the first try). Then submit the form on the live site.
 
 ## Notes
 
-- The old GitHub Pages workflows in `.github/workflows/` are left in place but are no
-  longer the hosting target; disable them in the repo's Actions settings if unwanted.
-- The backend accepts the form on both `/send-form` and `/api/send-form`, so it works
-  regardless of whether Passenger strips the `/api` prefix.
-
-## Local development
-
-```bash
-cd backend
-cp .env.example .env   # fill in real SMTP credentials
-npm install
-npm start              # serves the whole site + form endpoint on http://localhost:8000
-```
+- `backend/` (the Node.js version of the form handler) is **not deployed** — it's kept
+  in the repo only in case the site ever moves to a host with Node.js support.
+- The GitHub Pages workflows in `.github/workflows/` are no longer the hosting target;
+  disable them under the repo's Actions settings so the site isn't published twice.
+- To change the recipient address or subject, edit the `$to` / `$subject` variables
+  at the top of `api/send-form.php`.
