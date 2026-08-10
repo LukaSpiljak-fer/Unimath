@@ -1,9 +1,7 @@
 name: Deploy server to Pages
 
 on:
-  push:
-    branches:
-      - main
+  # site se sada deploya na cPanel (deploy-cpanel.yml); ostavljeno samo za ručno pokretanje
   workflow_dispatch:
 
 permissions:

@@ -8,16 +8,31 @@ plain PHP script (`api/send-form.php`), which works on every shared hosting plan
 - **Form handler**: `api/send-form.php` → `public_html/api/send-form.php`
 - The form on the site POSTs to `/api/send-form.php` (same domain, no CORS setup needed).
 
-## 1. Upload the site
+## 1. Automatic deploy (GitHub Actions → FTP)
 
-Upload everything **except** `backend/`, `.git/`, `.github/`, `.vscode/`, `README.md`
-and `DEPLOYMENT.md` into `public_html/`:
+`.github/workflows/deploy-cpanel.yml` syncs the site to `public_html/` over FTPS on
+every push to `main` (only changed files are uploaded). One-time setup:
 
-1. Zip the project folder locally (without the folders above).
-2. cPanel → **File Manager** → `public_html` → *Upload* → then *Extract*.
-   (Or use FTP with the credentials from your MyDataKnox welcome mail.)
-3. Make sure `index.html` ends up directly in `public_html/`, not in a subfolder,
-   and that `api/send-form.php` is at `public_html/api/send-form.php`.
+1. cPanel → **FTP Accounts** → *Add FTP Account*:
+   - Username: e.g. `deploy@unimath.hr`
+   - Directory: set it to `public_html` (so the account can't touch anything else)
+   - Strong password
+2. GitHub repo → **Settings → Secrets and variables → Actions → Secrets** → add:
+   - `FTP_SERVER` — the FTP host from cPanel (usually your domain or the server
+     hostname from the MyDataKnox welcome mail, e.g. `ftp.unimath.hr`)
+   - `FTP_USERNAME` — `deploy@unimath.hr`
+   - `FTP_PASSWORD` — the password from step 1
+3. Push to `main` (or run the workflow manually under Actions). The first run uploads
+   everything and can take a few minutes; later runs upload only what changed.
+
+The workflow excludes `backend/`, `.github/`, `.vscode/`, `README.md` and
+`DEPLOYMENT.md` automatically.
+
+### Manual upload (fallback)
+
+Zip the project (without the folders above), then cPanel → **File Manager** →
+`public_html` → *Upload* → *Extract*. Make sure `index.html` ends up directly in
+`public_html/` and the form handler at `public_html/api/send-form.php`.
 
 ## 2. Email
 
@@ -49,7 +64,7 @@ curl -X POST https://unimath.hr/api/send-form.php -F email=test@test.com -F poru
 
 - `backend/` (the Node.js version of the form handler) is **not deployed** — it's kept
   in the repo only in case the site ever moves to a host with Node.js support.
-- The GitHub Pages workflows in `.github/workflows/` are no longer the hosting target;
-  disable them under the repo's Actions settings so the site isn't published twice.
+- The old GitHub Pages workflows no longer run automatically (manual trigger only);
+  `deploy-cpanel.yml` is the active deployment.
 - To change the recipient address or subject, edit the `$to` / `$subject` variables
   at the top of `api/send-form.php`.
