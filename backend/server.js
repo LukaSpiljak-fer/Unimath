@@ -10,20 +10,46 @@ const upload = multer();
 
 const PORT = process.env.PORT || 8000;
 
-app.use(cors());
+// Iza cPanel/Passenger proxyja
+app.set('trust proxy', 1);
+
+const allowedOrigins = (process.env.ALLOWED_ORIGINS ||
+  'https://unimath.hr,https://www.unimath.hr,http://localhost:8000')
+  .split(',')
+  .map(function (o) { return o.trim(); })
+  .filter(Boolean);
+
+app.use(cors({
+  origin: function (origin, cb) {
+    // dopusti zahtjeve bez Origin headera (same-origin, curl)
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) return cb(null, true);
+    return cb(new Error('CORS: origin not allowed'));
+  },
+}));
 
 app.use(express.static(path.join(__dirname, '..')));
 
-app.post('/send-form', upload.none(), async (req, res) => {
+function clip(value, max) {
+  return String(value || '').slice(0, max).trim();
+}
+
+// '/send-form' kad Node poslužuje cijeli site,
+// '/api/send-form' kad je backend montiran pod /api na cPanelu
+app.post(['/send-form', '/api/send-form'], upload.none(), async (req, res) => {
   try {
     const body = req.body || {};
 
+    // honeypot
     if (body.website) return res.status(400).json({ ok: false, message: 'bot' });
 
-    const name = body.ime || body.name || 'Nepoznato';
-    const fromEmail = body.email || body.mail || '';
-    const phone = body.telefon || body.phone || '';
-    const message = body.poruka || body.message || '';
+    const name = clip(body.ime || body.name, 200);
+    const fromEmail = clip(body.email || body.mail, 320);
+    const phone = clip(body.telefon || body.phone, 50);
+    const message = clip(body.poruka || body.message, 5000);
+
+    if (!fromEmail || !message) {
+      return res.status(400).json({ ok: false, error: 'missing_fields' });
+    }
 
     const subject = process.env.EMAIL_SUBJECT || 'Upit s web stranice';
 
@@ -33,11 +59,10 @@ Telefon: ${phone}
 
 ${message}`;
 
-    // create transport
     const smtpOpts = {
       host: process.env.SMTP_HOST,
       port: parseInt(process.env.SMTP_PORT || '587', 10),
-      secure: (process.env.SMTP_SECURE === 'true') || false,
+      secure: process.env.SMTP_SECURE === 'true',
     };
 
     if (process.env.SMTP_USER) {
@@ -50,14 +75,13 @@ ${message}`;
     const transporter = nodemailer.createTransport(smtpOpts);
 
     const mailOptions = {
-      from: process.env.SENDER_EMAIL || process.env.SMTP_USER || 'no-reply@example.com',
-      to: process.env.TO_EMAIL || 'lukaspiljak.lukaspiljak@gmail.com',
+      from: process.env.SENDER_EMAIL || process.env.SMTP_USER,
+      to: process.env.TO_EMAIL || 'info@unimath.hr',
+      replyTo: fromEmail,
       subject: subject,
       text: text,
-      html: text.replace(/\n/g, '<br>')
+      html: text.replace(/\n/g, '<br>'),
     };
-
-    console.log('Sending contact form to', mailOptions.to);
 
     await transporter.sendMail(mailOptions);
 
@@ -66,11 +90,6 @@ ${message}`;
     console.error('send-form error', err);
     res.status(500).json({ ok: false, error: 'send_failed' });
   }
-});
-
-app.get('*', (req, res, next) => {
-  if (req.method !== 'GET') return next();
-  res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
 app.listen(PORT, () => {

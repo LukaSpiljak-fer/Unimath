@@ -1,6 +1,9 @@
 # UniMath — Apache konfiguracija za cPanel hosting
 # 301 preusmjeravanja sa starih WordPress URL-ova (čuvaju Google ranking nakon migracije)
 
+# index.html ima prednost pred WordPress index.php dok se stari site ne obriše
+DirectoryIndex index.html index.php
+
 RewriteEngine On
 
 # HTTPS + bez www (kanonski oblik: https://unimath.hr)
