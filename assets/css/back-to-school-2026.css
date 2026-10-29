@@ -512,6 +512,36 @@ p {
   gap: 20px;
   display: grid;
 }
+.line-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.line-grid .lightpink {
+  background: #FDEBF2;
+  border-radius: 12px;
+  min-height: 0;
+  padding: 12px 10px;
+  display: block;
+}
+.line-grid .lightpink > span {
+  background: none;
+  color: #B22A61;
+  border-radius: 0;
+  width: auto;
+  height: auto;
+  display: block;
+  font-size: 9px;
+  line-height: 1.2;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.line-grid .lightpink > p {
+  margin: 8px 0 0;
+  color: #42506B;
+  font-size: 10px;
+  line-height: 1.4;
+}
 .step-card {
   border-radius: 18px;
   flex-direction: column;
@@ -765,6 +795,7 @@ footer {
   }
   .principles,
   .step-grid,
+  .line-grid,
   .detail-grid {
     grid-template-columns: 1fr;
   }
