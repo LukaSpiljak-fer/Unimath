@@ -346,6 +346,31 @@ img{height:auto}
 .s6j.s6j{font-weight:800;font-size:18px;color:#B22A61}
 .s6k.s6k{background:#FFF6DE;border-radius:18px;padding:22px 26px;font-weight:700;color:#1F2A44;font-size:17px;line-height:1.6}
 
+/* ---- back-to-school article components ---- */
+.intro-copy{max-width:720px;color:#42506B}
+.section-lead{max-width:720px;color:#42506B}
+.step-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.step-card{border-radius:18px;min-height:265px;padding:27px;display:flex;flex-direction:column}
+.step-card.mint{background:#F1F8F6}
+.step-card.yellow{background:#FFF6DE}
+.step-card.pink{background:#FDEBF2}
+.step-card > span{background:#0D7377;color:#fff;border-radius:14px;width:50px;height:50px;display:grid;place-items:center;font-weight:900}
+.step-card.yellow > span{background:#FFC93F;color:#1F2A44}
+.step-card.pink > span{background:#E2477E}
+.step-card h3{margin:38px 0 15px;font-size:17px;line-height:1.15;font-weight:700}
+.step-card p{color:#42506B;margin:0;line-height:1.55}
+.step-card i{background:#0D7377;border-radius:3px;width:110px;height:5px;margin-top:auto;display:block}
+.step-card.yellow i{background:#FFC93F}
+.step-card.pink i{background:#E2477E}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.detail-card{background:#F1F8F6;border-radius:14px;padding:24px}
+.detail-card h3{margin-bottom:20px;font-size:19px}
+.detail-card p{color:#42506B;margin:0;font-size:15px;line-height:1.5}
+.signup-card{background:radial-gradient(220px 220px at 92% 12%,#FFC93F29,transparent 61%),linear-gradient(135deg,#0D7377,#0A4A4D);color:#fff;border-radius:24px 24px 24px 60px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:40px;margin-top:48px;padding:42px 46px}
+.signup-card h2{margin-bottom:28px;font-size:31px;line-height:1.2}
+.signup-card p{max-width:500px;color:#DCEFEB;margin:0;font-size:16px}
+.signup-card a{background:#FFC93F;color:#1F2A44;white-space:nowrap;border-radius:999px;padding:14px 24px;font-weight:900}
+
 
 .s2c > span{
   width:100%;
@@ -507,5 +532,21 @@ img{height:auto}
 }
 @media (max-width:620px){
   .s1i.s1i{white-space:normal;text-wrap:balance}
+  .step-grid,
+  .detail-grid{
+    grid-template-columns:1fr;
+  }
+  .step-card{
+    min-height:240px;
+  }
+  .signup-card{
+    border-radius:22px 22px 22px 48px;
+    grid-template-columns:1fr;
+    padding:34px 28px;
+  }
+  .signup-card a{
+    width:max-content;
+  }
+
   .s5q .line-grid{grid-template-columns:1fr}
 }
