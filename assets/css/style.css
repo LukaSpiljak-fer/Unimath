@@ -313,6 +313,7 @@ img{height:auto}
 .s5q .inlineSpec{background:#F1F8F6;border-left:4px solid #0D7377;border-radius:0 14px 14px 0;padding:15px 20px;font-family:'Figtree',sans-serif}
 .s5q .inlineSpec p{margin:0;color:#0A4A4D;font:600 15px/1.5 'Figtree',sans-serif}
 .s5q .inlineNote{background:#FFF6DE;border:0;border-radius:14px;padding:15px 20px;margin:0;color:#42506B;font:400 15px/1.5 'Figtree',sans-serif}
+.s5q > .s1w + .s1w{margin-top:-12px}
 .s5q .line-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;font-family:'Figtree',sans-serif}
 .s5q .line-grid .step-card.lightpink{background:#FDEBF2;border-radius:14px;min-height:0;padding:18px 16px;display:block}
 .s5q .line-grid .step-card.lightpink > span{background:none;color:#B22A61;border-radius:0;width:auto;height:auto;display:block;font:800 12px/1.3 'Figtree',sans-serif;text-transform:uppercase}
